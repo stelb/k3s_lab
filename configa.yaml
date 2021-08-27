@@ -3,4 +3,4 @@ ssh_authorized_keys:
 
 k3os:
   server_url: https://k3os-server:6443
-  token: K1098ac7abe01b93c7b1b6142fcb6c0289df120deedf446e899aee3fff6152903b5::server:b1a4878ced3707aba167d66868ec1a22
+  token: stelb:lab
