@@ -2,4 +2,6 @@ ssh_authorized_keys:
 - github:stelb
 hostname: k3os-server
 k3os:
-        token: stelb:lab
+  token: stelb:lab
+  modules:
+  - wireguard

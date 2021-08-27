@@ -4,3 +4,5 @@ ssh_authorized_keys:
 k3os:
   server_url: https://k3os-server:6443
   token: stelb:lab
+  modules:
+  - wireguard
