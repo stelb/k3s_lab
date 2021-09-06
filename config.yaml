@@ -5,3 +5,8 @@ k3os:
   token: stelb:lab
   modules:
   - wireguard
+  k3s_args:
+  - server
+  - --disable
+  - traefik
+  
