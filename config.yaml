@@ -1,10 +1,14 @@
 ssh_authorized_keys:
 - github:stelb
 hostname: k3os-server
+boot_cmd:
+- rc-update add rpc.statd
+- rc-update add nfs
 k3os:
   token: stelb:lab
   modules:
   - wireguard
+  - nfs
   k3s_args:
   - server
   - --disable
