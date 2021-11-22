@@ -1,9 +1,12 @@
 ssh_authorized_keys:
 - github:stelb
 hostname: k3os-server
+
 boot_cmd:
-- rc-update add rpc.statd
-- rc-update add nfs
+- mkdir -p /var/lib/nfs/sm
+- /usr/sbin/rc-update add nfsclient
+- ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
 k3os:
   token: stelb:lab
   modules:
@@ -13,4 +16,3 @@ k3os:
   - server
   - --disable
   - servicelb
-  

@@ -1,8 +1,10 @@
 ssh_authorized_keys:
 - github:stelb
+
 boot_cmd:
-- rc-update add rpc.statd
-- rc-update add nfs
+- mkdir -p /var/lib/nfs/sm
+- /usr/sbin/rc-update add nfsclient
+- ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 k3os:
   server_url: https://k3os-server:6443
