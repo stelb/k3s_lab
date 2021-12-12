@@ -3,9 +3,41 @@ ssh_authorized_keys:
 hostname: k3os-server
 
 boot_cmd:
+# make nfs client work
 - mkdir -p /var/lib/nfs/sm
 - /usr/sbin/rc-update add nfsclient
+# democratic-csi mounts localtime from host...
 - ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
+write_files:
+# docker.io proxy cache
+- encoding: ""
+  path: /etc/rancher/k3s/registries.yaml
+  owner: rancher
+  permission: "0640"
+  content: |-
+    mirrors:
+      docker.io:
+        endpoint:
+          - "https://registry.lab.stelb.de"
+# x-forwarded headers
+# https://medium.com/@_jonas/traefik-kubernetes-ingress-and-x-forwarded-headers-82194d319b0e
+- encoding: ""
+  path: /var/lib/rancher/k3s/server/manifests/traefik-config.yaml
+  owner: rancher
+  permission: "0640"
+  content: |-
+    apiVersion: helm.cattle.io/v1
+    kind: HelmChartConfig
+    metadata:
+      name: traefik
+      namespace: kube-system
+    spec:
+      valuesContent: |-
+        additionalArguments:
+          - "--entryPoints.web.proxyProtocol.insecure"
+          - "--entryPoints.web.forwardedHeaders.insecure"
+
 
 k3os:
   token: stelb:lab
@@ -13,6 +45,7 @@ k3os:
   - wireguard
   - nfs
   k3s_args:
+  # I use metallb
   - server
   - --disable
   - servicelb

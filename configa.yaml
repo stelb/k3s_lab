@@ -2,8 +2,10 @@ ssh_authorized_keys:
 - github:stelb
 
 boot_cmd:
+# make nfs client work
 - mkdir -p /var/lib/nfs/sm
 - /usr/sbin/rc-update add nfsclient
+# democratic-csi mounts localtime from host...
 - ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 k3os:
