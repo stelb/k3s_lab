@@ -8,6 +8,18 @@ boot_cmd:
 # democratic-csi mounts localtime from host...
 - ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
+write_files:
+# docker.io proxy cache
+- encoding: ""
+  path: /etc/rancher/k3s/registries.yaml
+  owner: rancher
+  permission: "0640"
+  content: |-
+    mirrors:
+      docker.io:
+        endpoint:
+          - "https://registry.lab.stelb.de"
+
 k3os:
   server_url: https://k3os-server:6443
   token: stelb:lab
