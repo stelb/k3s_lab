@@ -1,4 +1,7 @@
 # k3s_lab
+
+> [k3os is dead :-(](https://github.com/rancher/k3os/issues/846)
+
 config files for k3os installation
 
 in nebtboot.xyz boot.cfg add a line
